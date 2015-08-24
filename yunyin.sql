@@ -204,7 +204,7 @@ create table user
    phone                char(16),
    email                char(64),
    status               tinyint default 1,
-   create           timestamp default CURRENT_TIMESTAMP,
+   regtime           timestamp default CURRENT_TIMESTAMP,
    primary key (id),
    unique key AK_number_unique (number,sch_id)
 );
@@ -326,6 +326,9 @@ alter table book add constraint FK_book_of_printer foreign key (pri_id)
 
 alter table file add constraint FK_file_of_task foreign key (use_id)
       references user (id) on delete restrict on update restrict;
+
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 
 INSERT INTO `school` (`id`, `name`, `address`) VALUES
 (1, '南开大学', '天津市 南开区 卫津路94号'),
