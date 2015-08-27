@@ -160,7 +160,7 @@ create table printer
    status               tinyint default 1,
    rank                 int default 0,
    price                varchar(256),
-   detail           text,
+   other           text,
    primary key (id),
    unique key AK_account_unique (account)
 );
