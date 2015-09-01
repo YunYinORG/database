@@ -105,8 +105,8 @@ create table file
 (
 	id                  bigint not null auto_increment,
 	use_id				bigint not null,
-	name                char(64),
-	url                	char(64),
+	name                varchar(32),
+	url                	char(32),
 	time              	timestamp not null default CURRENT_TIMESTAMP,
 	primary key (id)
 );
@@ -116,7 +116,7 @@ create table task
 	id                  bigint not null auto_increment,
 	use_id				bigint not null,
 	pri_id				bigint not null,
-   fil_id            bigint not null,
+   url            char(32) not null,
 	requirements       	varchar(128),
 	copies              int default 1,
 	isdouble         bool,
@@ -124,6 +124,7 @@ create table task
 	color               bool,
 	ppt          tinyint default 0,
 	sended              tinyint default 0,
+   time                 timestamp not null default CURRENT_TIMESTAMP,
 	primary key (id)
 );
 
@@ -151,11 +152,11 @@ create table printer
    account              char(16) not null,
    password             char(32) not null,
    address              char(32),
-   email                char(64),
+   email                varchar(64),
    phone                char(16),
    qq                   char(16),
    profile              text,
-   image            char(64),
+   image            varchar(64),
    open            char(32),
    status               tinyint default 1,
    rank                 int default 0,
@@ -171,8 +172,9 @@ create table printer
 create table school
 (
    id                   bigint not null auto_increment,
-   name                 varchar(32),
+   name                 char(32),
    address              varchar(128),
+   abbr                 char(8),
    primary key (id)
 );
 
@@ -185,7 +187,7 @@ create table token
    to_id                bigint not null,
    type                 tinyint not null,
    time                 timestamp not null default CURRENT_TIMESTAMP,
-   token                char(64),
+   token                char(48),
    primary key (to_id, type),
    unique key AK_token_unique (token)
 );
@@ -216,6 +218,9 @@ create table share
 (
 	id 					bigint not null auto_increment,
 	fil_id				bigint not null,
+   use_id            bigint not null,
+   detail            text,
+   url               char(32),
 	time 				timestamp not null default CURRENT_TIMESTAMP,
 	name 				char(32) not null,
 	anonymous 			bool,
@@ -244,19 +249,19 @@ create table tag
 /*==============================================================*/
 create table hastag
 (
-	share_id 			bigint not null,
+	sha_id 			bigint not null,
 	tag_id 				bigint not null,
 	time 				timestamp not null default CURRENT_TIMESTAMP,
-	primary key(share_id,tag_id)
+	primary key(sha_id,tag_id)
 );
 
-create table usershare
-(
-	share_id 			bigint not null,
-	use_id				bigint not null,
-	time				timestamp not null default CURRENT_TIMESTAMP,
-	primary key(share_id,use_id)
-);
+-- create table usershare
+-- (
+-- 	sha_id 			bigint not null,
+-- 	use_id				bigint not null,
+-- 	time				timestamp not null default CURRENT_TIMESTAMP,
+-- 	primary key(sha_id,use_id)
+-- );
 /*=================================================教材*/
 create table book
 (
@@ -264,7 +269,7 @@ create table book
 	pri_id  			bigint not null,
 	name 				char(32) not null,
 	price				varchar(32) not null,
-	image			char(64),
+	image			varchar(64),
 	introdution 		text,
 	time                timestamp not null default CURRENT_TIMESTAMP,
 	primary key(id)
@@ -291,8 +296,8 @@ alter table task add constraint FK_task_of_printer foreign key (pri_id)
 alter table task add constraint FK_task_of_user foreign key (use_id)
       references user (id) on delete restrict on update restrict;
 
-alter table task add constraint FK_task_of_file foreign key (fil_id)
-      references file (id) on delete restrict on update restrict;
+-- alter table task add constraint FK_task_of_file foreign key (fil_id)
+--       references file (id) on delete restrict on update restrict;
 
 -- alter table notification add constraint FK_notification_of_task foreign key (task_id)
 --       references task (id) on delete restrict on update restrict;
@@ -309,16 +314,18 @@ alter table share add constraint FK_share_of_file foreign key (fil_id)
 alter table tag add constraint FK_tag_of_user foreign key (use_id)
       references user (id) on delete restrict on update restrict;
 
-alter table hastag add constraint FK_connection_of_share foreign key (share_id)
+alter table hastag add constraint FK_connection_of_share foreign key (sha_id)
 	  references share (id) on delete restrict on update restrict;
 
 alter table hastag add constraint FK_connetction_of_tag foreign key (tag_id)
       references tag (id) on delete restrict on update restrict;
 
-alter table usershare add constraint FK_usershare_of_share foreign key (share_id)
-	  references share (id) on delete restrict on update restrict;
+-- alter table usershare add constraint FK_usershare_of_share foreign key (sha_id)
+-- 	  references share (id) on delete restrict on update restrict;
 
-alter table usershare add constraint FK_usershare_of_user foreign key (use_id)
+-- alter table usershare add constraint FK_usershare_of_user foreign key (use_id)
+      -- references user (id) on delete restrict on update restrict;
+alter table share add constraint FK_share_of_user foreign key (use_id)
       references user (id) on delete restrict on update restrict;
 
 alter table book add constraint FK_book_of_printer foreign key (pri_id)
@@ -330,10 +337,11 @@ alter table file add constraint FK_file_of_task foreign key (use_id)
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 
-INSERT INTO `school` (`id`, `name`, `address`) VALUES
-(1, '南开大学', '天津市 南开区 卫津路94号'),
-(2, '天津大学', '天津市 南开区 卫津路92号'),
-(0, '无学校', '');
+INSERT INTO `school` (`id`, `name`, `address`,`abbr`) VALUES
+(1, '南开大学', '天津市 南开区 卫津路94号','nku'),
+(2, '天津大学', '天津市 南开区 卫津路92号','tju'),
+(3, '天津商职', '天津市 海河教育园 雅观路23号','tifert'),
+(0, '无学校', '','all');
 
 INSERT INTO `user`(`id`,`sch_id`) VALUES ('0','0' );
 INSERT INTO `card`(`id`) VALUES ('0');
