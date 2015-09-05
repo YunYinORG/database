@@ -270,7 +270,7 @@ create table book
 	name 				char(32) not null,
 	price				varchar(32) not null,
 	image			varchar(64),
-	introdution 		text,
+	detail 		text,
 	time                timestamp not null default CURRENT_TIMESTAMP,
 	primary key(id)
 );
