@@ -108,6 +108,7 @@ create table file
 	name                varchar(32),
 	url                	char(32),
 	time              	timestamp not null default CURRENT_TIMESTAMP,
+   status         tinyint not null default 1,
 	primary key (id)
 );
 
@@ -271,6 +272,7 @@ create table book
 	price				varchar(32) not null,
 	image			varchar(64),
 	detail 		text,
+   count       int default 0,
 	time                timestamp not null default CURRENT_TIMESTAMP,
 	primary key(id)
 );
