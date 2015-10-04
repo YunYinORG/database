@@ -118,6 +118,7 @@ create table task
 	use_id				bigint not null,
 	pri_id				bigint not null,
    url            char(32) not null,
+   name varchar(32),
 	requirements       	varchar(128),
 	copies              int default 1,
 	isdouble         bool,
