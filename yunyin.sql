@@ -106,7 +106,7 @@ create table file
 	id                  bigint not null auto_increment,
 	use_id				bigint not null,
 	name                varchar(32),
-	url                	char(32),
+	url                	char(48),
 	time              	timestamp not null default CURRENT_TIMESTAMP,
    status         tinyint not null default 1,
 	primary key (id)
@@ -117,14 +117,14 @@ create table task
 	id                  bigint not null auto_increment,
 	use_id				bigint not null,
 	pri_id				bigint not null,
-   url            char(32) not null,
+   url            char(48) not null,
    name varchar(32),
 	requirements       	varchar(128),
 	copies              int default 1,
 	isdouble         bool,
-	status              tinyint,
+	status              tinyint default 1,
 	color               bool,
-	ppt          tinyint default 0,
+	format          tinyint default 0,
 	sended              tinyint default 0,
    time                 timestamp not null default CURRENT_TIMESTAMP,
 	primary key (id)
@@ -177,6 +177,8 @@ create table school
    name                 char(32),
    address              varchar(128),
    abbr                 char(8),
+   verify               varchar(16),
+   verifyurl            varchar(32),
    primary key (id)
 );
 
@@ -222,13 +224,14 @@ create table share
 	fil_id				bigint not null,
    use_id            bigint not null,
    detail            text,
-   url               char(32),
+   url               char(48),
 	time 				timestamp not null default CURRENT_TIMESTAMP,
 	name 				char(32) not null,
 	anonymous 			bool,
 	reference			bigint default 0,
 	primary key(id),
 	unique key share_file_unique (fil_id),
+   unique key share_url_unique (url),
 	check(reference >= 0)
 );
 
