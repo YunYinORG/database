@@ -121,7 +121,7 @@ create table task
    name varchar(32),
 	requirements       	varchar(128),
 	copies              int default 1,
-	isdouble         bool,
+	double         bool,
 	status              tinyint default 1,
 	color               bool,
 	format          tinyint default 0,
