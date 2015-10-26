@@ -125,7 +125,7 @@ create table task
 	status              tinyint default 1,
 	color               bool,
 	format          tinyint default 0,
-	sended              tinyint default 0,
+	payed              tinyint default 0,
    time                 timestamp not null default CURRENT_TIMESTAMP,
 	primary key (id)
 );
