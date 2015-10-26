@@ -157,12 +157,13 @@ create table printer
    email                varchar(64),
    phone                char(16),
    qq                   char(16),
+   wechat               char(16),
    profile              text,
-   image            varchar(64),
-   open            char(32),
+   image                varchar(64),
+   open                 varchar(32),
    status               tinyint default 1,
    rank                 int default 0,
-   price                varchar(256),
+   price                text,
    other           text,
    primary key (id),
    unique key AK_account_unique (account)
@@ -343,11 +344,11 @@ alter table file add constraint FK_file_of_task foreign key (use_id)
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 
-INSERT INTO `school` (`id`, `name`, `address`,`abbr`) VALUES
-(1, '南开大学', '天津市 南开区 卫津路94号','nku'),
-(2, '天津大学', '天津市 南开区 卫津路92号','tju'),
-(3, '天津商职', '天津市 海河教育园 雅观路23号','tifert'),
-(0, '无学校', '','all');
+INSERT INTO `school` (`id`, `name`, `address`,`abbr`,`verify`,`verifyurl`) VALUES
+(1, '南开大学', '天津市 南开区 卫津路94号','nku','信息门户(URP)','http://urp.nku.cn'),
+(2, '天津大学', '天津市 南开区 卫津路92号','tju','天大办公网','http://e.tju.edu.cn'),
+(3, '天津商职', '天津市 海河教育园 雅观路23号','tifert','教务处网站','http://jw.tifert.edu.cn/2003/'),
+(0, '无学校', '','all','','');
 
 INSERT INTO `user`(`id`,`sch_id`) VALUES ('0','0' );
 INSERT INTO `card`(`id`) VALUES ('0');
