@@ -4,9 +4,9 @@
 /*==============================================================*/
 
 
-drop table if exists card;
+-- drop table if exists card;
 
-drop table if exists cardlog;
+-- drop table if exists cardlog;
 
 drop table if exists code;
 
@@ -35,26 +35,26 @@ drop table if exists tag;
 /*==============================================================*/
 /* Table: card                                                  */
 /*==============================================================*/
-create table card
-(
-   id                   bigint not null,
-   off                  tinyint default 0,
-   blocked              bool default 0,
-   primary key (id)
-);
+-- create table card
+-- (
+--    id                   bigint not null,
+--    off                  tinyint default 0,
+--    blocked              bool default 0,
+--    primary key (id)
+-- );
 
 /*==============================================================*/
 /* Table: cardlog                                               */
 /*==============================================================*/
-create table cardlog
-(
-   id                   bigint not null auto_increment,
-   find_id              bigint not null,
-   lost_id              bigint not null,
-   time                 timestamp default CURRENT_TIMESTAMP,
-   status               tinyint,
-   primary key (id)
-);
+-- create table cardlog
+-- (
+--    id                   bigint not null auto_increment,
+--    find_id              bigint not null,
+--    lost_id              bigint not null,
+--    time                 timestamp default CURRENT_TIMESTAMP,
+--    status               tinyint,
+--    primary key (id)
+-- );
 
 /*==============================================================*/
 /* Table: code                                                  */
@@ -121,7 +121,7 @@ create table task
    name varchar(32),
 	requirements       	varchar(128),
 	copies              int default 1,
-	double         bool,
+	`double`         bool,
 	status              tinyint default 1,
 	color               bool,
 	format          tinyint default 0,
@@ -282,14 +282,14 @@ create table book
 	primary key(id)
 );
 
-alter table card add constraint FK_card_info_of_user foreign key (id)
-      references user (id) on delete restrict on update restrict;
+-- alter table card add constraint FK_card_info_of_user foreign key (id)
+--       references user (id) on delete restrict on update restrict;
 
-alter table cardlog add constraint FK_user_find_card foreign key (find_id)
-      references user (id) on delete restrict on update restrict;
+-- alter table cardlog add constraint FK_user_find_card foreign key (find_id)
+--       references user (id) on delete restrict on update restrict;
 
-alter table cardlog add constraint FK_user_lost_card foreign key (lost_id)
-      references user (id) on delete restrict on update restrict;
+-- alter table cardlog add constraint FK_user_lost_card foreign key (lost_id)
+--       references user (id) on delete restrict on update restrict;
 
 alter table code add constraint FK_code_of_user foreign key (use_id)
       references user (id) on delete restrict on update restrict;
@@ -351,4 +351,3 @@ INSERT INTO `school` (`id`, `name`, `address`,`abbr`,`verify`,`verifyurl`) VALUE
 (0, '无学校', '','all','','');
 
 INSERT INTO `user`(`id`,`sch_id`) VALUES ('0','0' );
-INSERT INTO `card`(`id`) VALUES ('0');
