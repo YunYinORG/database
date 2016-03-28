@@ -204,7 +204,7 @@ create table user
 (
    id                   bigint not null auto_increment,
    sch_id               bigint not null,
-   number       char(10),
+   number       char(12),
    password             char(32),
    name                 char(8),
    gender               char(2),
@@ -348,6 +348,9 @@ INSERT INTO `school` (`id`, `name`, `address`,`abbr`,`verify`,`verifyurl`) VALUE
 (1, '南开大学', '天津市 南开区 卫津路94号','nku','信息门户(URP)','http://urp.nku.cn'),
 (2, '天津大学', '天津市 南开区 卫津路92号','tju','天大办公网','http://e.tju.edu.cn'),
 (3, '天津商职', '天津市 海河教育园 雅观路23号','tifert','教务处网站','http://jw.tifert.edu.cn/2003/'),
+(4, '河北工业大学', '天津市 北辰区 西平道5340号', 'hebut', '综合教务系统', 'http://115.24.160.162/'),
+(5, '广州番禺职业学院', '广东省 广州市 番禺区市良路1342号','gzpyp','教务处网站','http://jw.gzpyp.edu.cn/'),
+(6, '湖南理工学院', '湖南省 岳阳市 岳阳楼区学院路439号', 'hnist', '信息服务系统', 'http://info.hnist.cn/'),
 (0, '无学校', '','all','','');
 
 INSERT INTO `user`(`id`,`sch_id`) VALUES ('0','0' );
