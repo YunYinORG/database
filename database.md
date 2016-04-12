@@ -1,10 +1,10 @@
 
 主要内容
 =====
-基本思想
-环境安装
-账户和限制
-自动运维
+* 基本思想
+* 环境安装
+* 账户和限制
+* 自动运维
 
 一.数据库管理指导思想
 =========
@@ -16,23 +16,22 @@
 
 二.环境和安装
 =========
-操作系统 centos 7.x
-数据库 MariaBD 5.5 (MySQL)
+* 操作系统 centos 7.x
+* 数据库 MariaBD 5.5 (MySQL)
+
 安装数据库
 ```
 sudo yum install mariadb mariadb-server
 ```
 
-账号和命令行测试
-```
-#启动数据库
-sudo systemctl start mariadb
-#重启
-sudo systemctl restart mariadb.service
-#设置 root密码等相关
-mysql_secure_installation
+账号和命令行测
 
-#root 登录测试
+#启动数据库
+```
+
+sudo systemctl start mariadb
+sudo systemctl restart mariadb.service
+mysql_secure_installation
 mysql -uroot -p
 ```
 
@@ -51,6 +50,7 @@ mysql -uroot -p
 | 招领    | find       |  读写  | 内网指定 |  user  |
 
 
+创建账号和权限设置
 ```
 mysql -u root -p
 
@@ -62,7 +62,7 @@ GRANT DELETE,EVENT,EXECUTE,INSERT,LOCK TABLES,SELECT,UPDATE,SHOW VIEW ON find.* 
 ...
 
 ```
-参见(http://yangfanweb.cn/管理-mariadb-用户账户/)[http://yangfanweb.cn/%E7%AE%A1%E7%90%86-mariadb-%E7%94%A8%E6%88%B7%E8%B4%A6%E6%88%B7/]
+参见[http://yangfanweb.cn/管理-mariadb-用户账户/](http://yangfanweb.cn/%E7%AE%A1%E7%90%86-mariadb-%E7%94%A8%E6%88%B7%E8%B4%A6%E6%88%B7/)
 
 四.配置和运维
 ========
@@ -82,7 +82,7 @@ port=1234
 bind-address=0.0.0.0
 ```
 
-3.数据导入导出
+3. 数据导入导出
 创建
 ```
 CREATE DATABASE yunyin DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -95,6 +95,7 @@ mysql -uroot -p yunyin<yunyin.sql
 ```
 mysqldump -ubackup -p yunyin | gzip >backup/yy.sql.gz;
 ```
+
 4.定时备份
 
 5.服务监视
